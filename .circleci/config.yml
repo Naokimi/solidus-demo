@@ -48,5 +48,4 @@ workflows:
   build_and_test:
     jobs:
       - test
-      - done:
-        requires: test
+      - done
