@@ -34,14 +34,13 @@ jobs:
           name: Database setup
           command: bundle exec rails db:schema:load --trace
       - ruby/rspec-test # Run rspec in parallel
-
-done:
-  docker:
-    - image: circleci/ruby:2.6.6-node-browsers
-  executor: ruby/default
-  steps:
-    - coveralls/upload:
-      parallel_finished: true
+  done:
+    docker:
+      - image: circleci/ruby:2.6.6-node-browsers
+    executor: ruby/default
+    steps:
+      - coveralls/upload:
+        parallel_finished: true
 
 workflows:
   version: 2
