@@ -49,4 +49,4 @@ workflows:
     jobs:
       - test
       - done:
-        requires: [test]
+        requires: test
