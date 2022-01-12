@@ -80,6 +80,7 @@ end
 group :test do
   # Adds support for Capybara system testing
   gem 'capybara', '>= 2.15'
+  gem 'coveralls_reborn', '~> 0.23.1', require: false
   gem 'apparition'
   gem 'factory_bot'
   gem 'rspec_junit_formatter'
