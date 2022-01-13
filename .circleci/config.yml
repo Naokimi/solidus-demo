@@ -3,6 +3,7 @@ version: 2.1
 orbs:
   ruby: circleci/ruby@1.0
   node: circleci/node@2
+  coveralls: coveralls/coveralls@1.0.6
 
 jobs:
   test:
@@ -34,9 +35,18 @@ jobs:
           name: Database setup
           command: bundle exec rails db:schema:load --trace
       - ruby/rspec-test # Run rspec in parallel
+  done:
+    docker:
+      - image: circleci/ruby:2.6.6-node-browsers
+    steps:
+      - coveralls/upload:
+          parallel_finished: true
 
 workflows:
   version: 2
   build_and_test:
     jobs:
       - test
+      - done:
+          requires:
+            - test
