@@ -39,7 +39,7 @@ jobs:
       - image: circleci/ruby:2.6.6-node-browsers
     executor: ruby/default
     steps:
-      -run:
+      - run:
         - curl -k https://coveralls.io/webhook?repo_token=$COVERALLS_REPO_TOKEN -d "payload[build_num]=$CIRCLE_WORKFLOW_ID&payload[status]=done"
 
 workflows:
