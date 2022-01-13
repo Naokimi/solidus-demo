@@ -3,7 +3,6 @@ version: 2.1
 orbs:
   ruby: circleci/ruby@1.0
   node: circleci/node@2
-  coveralls: coveralls/coveralls@1.0.6
 
 jobs:
   test:
@@ -40,8 +39,9 @@ jobs:
       - image: circleci/ruby:2.6.6-node-browsers
     executor: ruby/default
     steps:
-      - coveralls/upload:
-          parallel_finished: true
+      - run:
+          name: Coveralls API call
+          command: curl -k https://coveralls.io/webhook?repo_token=$COVERALLS_REPO_TOKEN -d "payload[service_num]=$CIRCLE_WORKFLOW_ID&payload[status]=done"
 
 workflows:
   version: 2
@@ -49,5 +49,5 @@ workflows:
     jobs:
       - test
       - done:
-          requires:
-            - test
+        requires:
+          - test
